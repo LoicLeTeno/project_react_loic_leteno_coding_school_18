@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-
 function App() {
-  return (
-    <div className="App">
+    return (
+        <div className="App">
+            <header className="App-header">
 
-    </div>
-  );
+            </header>
+        </div >
+    );
 }
 
 export default App;
