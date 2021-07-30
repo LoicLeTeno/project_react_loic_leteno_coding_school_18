@@ -1,3 +1,6 @@
+import React, { Component } from 'react';
+
+
 class POKEMON extends Component {
 
     // Valeur de base pokémons
