@@ -8,7 +8,11 @@ function PokemonList() {
     const [pokemons, setPokemons] = useState([]);
 
     useEffect(() => {
-        setPokemons(POKEMONS);
+        fetch('http://localhost:3001/pokemons')
+        .then(response => response.json())
+        .then((pokemons) => {
+            setPokemons(pokemons)
+        })
     }, []);
 
     return (

@@ -8,12 +8,14 @@ import formatType from '../components/format/format-type';
 import { render } from '@testing-library/react';
 
 function PokemonDetails({ match }) {
+
     const [pokemon, setPokemon] = useState(null);
+
     useEffect(() => {
-        POKEMONS.forEach(pokemon => {
-            if (match.params.id === pokemon.id.toString()) {
-                setPokemon(pokemon);
-            }
+        fetch(`http://localhost:3001/pokemons/${match.params.id}`)
+        .then(response => response.json())
+        .then(pokemon => {
+            if (pokemon.id) setPokemon(pokemon);
         });
     }, [match.params.id]);
 

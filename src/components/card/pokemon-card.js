@@ -1,21 +1,13 @@
 import React, { Component, useState } from 'react';
-import { propTypes } from 'react-bootstrap/esm/Image';
 
 import '../../sass/modules/_pokemon-card.scss';
-import POKEMONS from '../../models/mock-pokemons';
-import POKEMON from '../../models/pokemon';
 
 import formatDate from '../format/format-date';
 import formatType from '../format/format-type';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 
 
 function PokemonCard({ pokemon, borderColor = '#009688' }) {
-
-    // PokemonCard.propTypes = {
-    //     pokemon: POKEMON
-    // }
-
     const [color, setColor] = useState();
     const history = useHistory();
 
@@ -50,4 +42,4 @@ function PokemonCard({ pokemon, borderColor = '#009688' }) {
     )
 }
 
-export default PokemonCard
+export default PokemonCard;
