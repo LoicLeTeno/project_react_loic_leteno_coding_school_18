@@ -2,13 +2,13 @@
   "pokemons": [
     {
       "id": 1,
-      "name": "Bulbizarre",
+      "name": "Bulbizarrrre",
       "hp": 25,
       "cp": 5,
       "picture": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png",
       "types": [
         "Plante",
-        "Poison"
+        "Electrik"
       ]
     },
     {
@@ -125,16 +125,6 @@
       ]
     },
     {
-      "id": 1627773931699,
-      "hp": 100,
-      "cp": 10,
-      "name": "new pokémon",
-      "picture": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/185.png",
-      "types": [
-        "Normal"
-      ]
-    },
-    {
       "id": 1627774110533,
       "hp": "987",
       "cp": "2",
@@ -143,6 +133,18 @@
       "types": [
         "Feu",
         "Plante"
+      ]
+    },
+    {
+      "id": 1627775081604,
+      "hp": "555",
+      "cp": "7",
+      "name": "test",
+      "picture": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/425.png",
+      "types": [
+        "Vol",
+        "Fée",
+        "Insecte"
       ]
     }
   ]

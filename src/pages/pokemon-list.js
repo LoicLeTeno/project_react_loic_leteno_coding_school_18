@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-import POKEMON from '../models/pokemon';
-import POKEMONS from '../models/mock-pokemons';
 import PokemonCard from '../components/card/pokemon-card';
 import PokemonService from '../services/pokemon-service';
 
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 
 function PokemonList() {
     const [pokemons, setPokemons] = useState([]);
@@ -20,11 +19,11 @@ function PokemonList() {
             <div className="container">
                 <div className="row">
                     {pokemons.map(pokemon => (
-                        <PokemonCard key={pokemon.id} pokemon={pokemon}/>
+                        <PokemonCard key={pokemon.id} pokemon={pokemon} />
                     ))}
                 </div>
 
-                <Link className="btn-floating btn-large waves-effect waves-light red 2-depth-3" style={{position: 'fixed', bottom: '25px', right: '25px' }} to="/pokemon/add">
+                <Link className="btn-floating btn-large waves-effect waves-light red 2-depth-3" style={{ position: 'fixed', bottom: '25px', right: '25px' }} to="/pokemon/add">
                     <i className="material-icons">add</i>
                 </Link>
             </div>

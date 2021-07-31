@@ -1,6 +1,3 @@
-import POKEMON from "./pokemon";
-
-
 const POKEMONS = [
     {
         id: 1,
@@ -111,4 +108,5 @@ const POKEMONS = [
         created: new Date()
     }
 ];
+
 export default POKEMONS;

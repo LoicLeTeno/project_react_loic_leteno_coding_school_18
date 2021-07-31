@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import POKEMONS from '../models/mock-pokemons';
-
 import formatDate from '../components/format/format-date';
 import formatType from '../components/format/format-type';
 import { render } from '@testing-library/react';
 import PokemonService from '../services/pokemon-service';
 
-function PokemonDetails({ match }) {
 
+function PokemonDetails({ match }) {
     const [pokemon, setPokemon] = useState(null);
 
+    // LIER LE POINTER AVEC LES DETZILS DU POKEMON SELECTIONNER 
     useEffect(() => {
         PokemonService.getPokemon(+match.params.id).then(pokemon => setPokemon(pokemon));
     }, [match.params.id]);

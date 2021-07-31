@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-
-import POKEMON from '../../models/pokemon';
+import { useHistory } from 'react-router-dom'
 
 import formatType from '../format/format-type';
-import { useHistory } from 'react-router-dom'
+
 import PokemonService from '../../services/pokemon-service';
 
 
@@ -15,6 +14,7 @@ function PokemonForm({ pokemon, isEditForm }) {
         cp: { value: pokemon.cp, isValid: true },
         types: { value: pokemon.types, isValid: true }
     })
+
     const history = useHistory();
 
     const types = [
@@ -24,6 +24,7 @@ function PokemonForm({ pokemon, isEditForm }) {
     const leType = (type) => {
         return form.types.value.includes(type);
     }
+
     const inputChange = (e) => {
         const fieldName = e.target.name;
         const fieldValue = e.target.value;
@@ -31,13 +32,13 @@ function PokemonForm({ pokemon, isEditForm }) {
 
         setForm({ ...form, ...newField })
     }
+
     const isAddForm = () => {
         return !isEditForm;
     }
 
     const validateForm = () => {
         let newForm = form;
-
         // Validation url
         if (isAddForm()) {
             const start = "https://assets.pokemon.com/assets/img/pokedex/detail/";
@@ -86,6 +87,7 @@ function PokemonForm({ pokemon, isEditForm }) {
         setForm(newForm);
         return newForm.name.isValid && newForm.hp.isValid && newForm.cp.isValid;
     }
+
     const selectType = (type, e) => {
         const checked = e.target.checked;
         let newField;
@@ -100,9 +102,9 @@ function PokemonForm({ pokemon, isEditForm }) {
             const newTypes = form.types.value.filter((currentType) => currentType !== type);
             newField = { value: newTypes };
         }
-
         setForm({ ...form, ...{ types: newField } });
     }
+
     const typesValid = (type) => {
         if (form.types.value.lenght === 1 && leType(type)) {
             return false;
@@ -114,6 +116,7 @@ function PokemonForm({ pokemon, isEditForm }) {
 
         return true;
     }
+
     const setSubmit = (e) => {
         e.preventDefault();
         const formValid = validateForm();
@@ -140,7 +143,6 @@ function PokemonForm({ pokemon, isEditForm }) {
     const deletePokemon = () => {
         PokemonService.deletePokemon(pokemon).then(() => history.push('/'));
     }
-
 
     return (
         <form onSubmit={e => setSubmit(e)}>

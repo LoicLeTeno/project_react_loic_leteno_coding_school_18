@@ -1,9 +1,6 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { Fragment } from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import PageError from '../pages/pokemon-error';
-
-import POKEMON from '../models/pokemon';
-import POKEMONS from '../models/mock-pokemons';
 
 import PokemonList from '../pages/pokemon-list';
 import PokemonDetails from '../pages/pokemon-details';
@@ -12,21 +9,13 @@ import PokemonAdd from '../pages/pokemon-add';
 
 
 function Body() {
-
-    // const [pokemons, setPokemons] = useState([])
-    // // console.log(pokemons);
-
-    // useEffect(() => {
-    //     setPokemons(POKEMONS);
-    // }, [])
-
     return (
         <Fragment>
             <Router>
                 <div>
                     <nav>
                         <div className="nav-wrapper teal">
-                            <Link to="/" className="brand-logo center">Pokédex</Link>
+                            <Link to="/" className="brand-logo center">Loïc le Téno (regarder l'index.html ?) </Link>
                         </div>
                     </nav>
 

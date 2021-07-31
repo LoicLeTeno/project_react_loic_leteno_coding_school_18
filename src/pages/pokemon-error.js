@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 
 function PageError() {
-
     return (
         <div className="center">
             <img src="http://assets.pokemon.com/assets/cms2/img/pokedex/full/129.png" alt="Page non trouvée" />

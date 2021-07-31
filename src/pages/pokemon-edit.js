@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router';
 
-import POKEMONS from '../models/mock-pokemons';
-import POKEMON from '../models/pokemon';
 import PokemonForm from '../components/form/pokemon-form';
 import PokemonService from '../services/pokemon-service';
 

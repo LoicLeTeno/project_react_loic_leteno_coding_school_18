@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 
-import Pokemon from "../models/pokemon";
 
 class PokemonService extends Component {
+
+    // LIEN DB POKEMON
 
     static getPokemons() {
         return fetch('http://localhost:3001/pokemons')
@@ -17,6 +18,9 @@ class PokemonService extends Component {
             .catch(error => this.handleError(error));
     }
 
+
+    // MISE A JOUR POKMON
+
     static updatePokemon(pokemon) {
         return fetch(`http://localhost:3001/pokemons/${pokemon.id}`, {
             method: 'PUT',
@@ -27,6 +31,8 @@ class PokemonService extends Component {
             .catch(error => this.handleError(error));
     }
 
+// SUPPRIMER PÖKEMON
+
     static deletePokemon(pokemon) {
         return fetch(`http://localhost:3001/pokemons/${pokemon.id}`, {
             method: 'DELETE',
@@ -36,6 +42,8 @@ class PokemonService extends Component {
             .catch(error => this.handleError(error));
     }
 
+    // AJOUTER POKEMON
+
     static addPokemon(pokemon) {
         delete pokemon.created;
 
@@ -44,13 +52,17 @@ class PokemonService extends Component {
             body: JSON.stringify(pokemon),
             headers: { 'Content-Type': 'application/json' }
         })
-        .then(response => response.json())
-        .catch(error => this.handleError(error));
+            .then(response => response.json())
+            .catch(error => this.handleError(error));
     }
+
+    // RETOUR SI LA DB EST VIDE 
 
     static isEmpty(data) {
         return Object.keys(data).length === 0;
     }
+
+    // POSSIBLE ERROR
 
     static handleError(error) {
         console.log(error);

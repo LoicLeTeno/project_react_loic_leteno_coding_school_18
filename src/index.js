@@ -15,10 +15,10 @@ import 'materialize-css/dist/js/materialize'
 import '@fortawesome/fontawesome-free/js/all'
 import 'material-icons'
 
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
-

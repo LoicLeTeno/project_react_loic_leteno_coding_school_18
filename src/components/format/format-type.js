@@ -42,5 +42,4 @@ const formatType = (type) => {
     return `chip ${color}`;
 }
 
-
 export default formatType;
