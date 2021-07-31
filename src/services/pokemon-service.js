@@ -21,16 +21,28 @@ class PokemonService extends Component {
         return fetch(`http://localhost:3001/pokemons/${pokemon.id}`, {
             method: 'PUT',
             body: JSON.stringify(pokemon),
-            headers: { 'Content-Type': 'application/json'}
+            headers: { 'Content-Type': 'application/json' }
         })
-        .then(response => response.json())
-        .catch(error => this.handleError(error));
+            .then(response => response.json())
+            .catch(error => this.handleError(error));
     }
 
     static deletePokemon(pokemon) {
-        fetch(`http://localhost:3001/pokemons/${pokemon.id}`, {
+        return fetch(`http://localhost:3001/pokemons/${pokemon.id}`, {
             method: 'DELETE',
-            headers: { 'Content-Type': 'application/json'}
+            headers: { 'Content-Type': 'application/json' }
+        })
+            .then(response => response.json())
+            .catch(error => this.handleError(error));
+    }
+
+    static addPokemon(pokemon) {
+        delete pokemon.created;
+
+        return fetch(`http://localhost:3001/pokemons`, {
+            method: 'POST',
+            body: JSON.stringify(pokemon),
+            headers: { 'Content-Type': 'application/json' }
         })
         .then(response => response.json())
         .catch(error => this.handleError(error));
