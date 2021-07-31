@@ -1,4 +1,7 @@
-export const POKEMONS = [
+import POKEMON from "./pokemon";
+
+
+const POKEMONS = [
     {
         id: 1,
         name: "Bulbizarre",
