@@ -4,6 +4,7 @@ import POKEMON from '../../models/pokemon';
 
 import formatType from '../format/format-type';
 import { useHistory } from 'react-router-dom'
+import PokemonService from '../../services/pokemon-service';
 
 
 function PokemonForm({ pokemon }) {
@@ -98,8 +99,16 @@ function PokemonForm({ pokemon }) {
         const formValid = validateForm();
 
         if (formValid) {
-            history.push(`/pokemons/${pokemon.id}`)
+            pokemon.name = form.name.value;
+            pokemon.hp = form.hp.value;
+            pokemon.cp = form.cp.value;
+            pokemon.types = form.types.value;
+            PokemonService.updatePokemon(pokemon).then(() => history.push(`/pokemons/${pokemon.id}`));
         }
+    }
+
+    const deletePokemon = () => {
+        PokemonService.deletePokemon(pokemon).then(() => history.push('/pokemons'))
     }
 
 

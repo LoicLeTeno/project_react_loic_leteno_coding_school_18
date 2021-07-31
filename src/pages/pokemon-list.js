@@ -3,16 +3,13 @@ import React, { useState, useEffect } from 'react';
 import POKEMON from '../models/pokemon';
 import POKEMONS from '../models/mock-pokemons';
 import PokemonCard from '../components/card/pokemon-card';
+import PokemonService from '../services/pokemon-service';
 
 function PokemonList() {
     const [pokemons, setPokemons] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:3001/pokemons')
-        .then(response => response.json())
-        .then((pokemons) => {
-            setPokemons(pokemons)
-        })
+        PokemonService.getPokemons().then(pokemons => setPokemons(pokemons));
     }, []);
 
     return (

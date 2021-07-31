@@ -4,17 +4,14 @@ import { RouteComponentProps } from 'react-router';
 import POKEMONS from '../models/mock-pokemons';
 import POKEMON from '../models/pokemon';
 import PokemonForm from '../components/form/pokemon-form';
+import PokemonService from '../services/pokemon-service';
 
 
 function PokemonEdit({ match }) {
     const [pokemon, setPokemon] = useState(null);
 
     useEffect(() => {
-        POKEMONS.forEach(pokemon => {
-            if (match.params.id === pokemon.id.toString()) {
-                setPokemon(pokemon);
-            }
-        })
+        PokemonService.getPokemon(+match.params.id).then(pokemon => setPokemon(pokemon));
     }, [match.params.id]);
 
     return (
