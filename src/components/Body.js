@@ -8,6 +8,7 @@ import POKEMONS from '../models/mock-pokemons';
 import PokemonList from '../pages/pokemon-list';
 import PokemonDetails from '../pages/pokemon-details';
 import PokemonEdit from '../pages/pokemon-edit';
+import PokemonAdd from '../pages/pokemon-add';
 
 
 function Body() {
@@ -32,6 +33,7 @@ function Body() {
                     <Switch>
                         <Route exact path="/" component={PokemonList} />
                         <Route exact path="/pokemons" component={PokemonList} />
+                        <Route exact path="/pokemon/add" component={PokemonAdd} />
                         <Route exact path="/pokemons/edit/:id" component={PokemonEdit} />
                         <Route path="/pokemons/:id" component={PokemonDetails} />
                         <Route component={PageError} />

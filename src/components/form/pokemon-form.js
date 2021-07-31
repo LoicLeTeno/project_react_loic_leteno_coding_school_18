@@ -7,8 +7,9 @@ import { useHistory } from 'react-router-dom'
 import PokemonService from '../../services/pokemon-service';
 
 
-function PokemonForm({ pokemon }) {
+function PokemonForm({ pokemon, isEditForm }) {
     const [form, setForm] = useState({
+        picture: { value: pokemon.picture },
         name: { value: pokemon.name, isValid: true },
         hp: { value: pokemon.hp, isValid: true },
         cp: { value: pokemon.cp, isValid: true },
@@ -30,8 +31,27 @@ function PokemonForm({ pokemon }) {
 
         setForm({ ...form, ...newField })
     }
+    const isAddForm = () => {
+        return !isEditForm;
+    }
+
     const validateForm = () => {
         let newForm = form;
+
+        // Validation url
+        if (isAddForm()) {
+            const start = "https://assets.pokemon.com/assets/img/pokedex/detail/";
+            const end = ".png";
+
+            if (!form.picture.value.startsWith(start) || !form.picture.value.endsWith(end)) {
+                const errorMsg = 'L\'url n\'est pas valide.';
+                const newField = { value: form.picture.value, error: errorMsg, isValid: false };
+                newForm = { ...newForm, ...{ picture: newField } };
+            } else {
+                const newField = { value: form.picture.value, error: '', isValid: true };
+                newForm = { ...newForm, ...{ picture: newField } };
+            }
+        }
 
         // Validator name
         if (!/^[a-zA-Zàéè ]{3,25}$/.test(form.name.value)) {
@@ -81,7 +101,7 @@ function PokemonForm({ pokemon }) {
             newField = { value: newTypes };
         }
 
-        setForm({...form, ...{ types: newField }});
+        setForm({ ...form, ...{ types: newField } });
     }
     const typesValid = (type) => {
         if (form.types.value.lenght === 1 && leType(type)) {
@@ -99,12 +119,22 @@ function PokemonForm({ pokemon }) {
         const formValid = validateForm();
 
         if (formValid) {
+            pokemon.picture = form.picture.value;
             pokemon.name = form.name.value;
             pokemon.hp = form.hp.value;
             pokemon.cp = form.cp.value;
             pokemon.types = form.types.value;
-            PokemonService.updatePokemon(pokemon).then(() => history.push(`/pokemons/${pokemon.id}`));
+
+            isEditForm ? updatePokemon() : addPokemon();
         }
+    }
+
+    const addPokemon = () => {
+        PokemonService.addPokemon(pokemon).then(() => history.push('/'))
+    }
+
+    const updatePokemon = () => {
+        PokemonService.updatePokemon(pokemon).then(() => history.push(`/pokemons/${pokemon.id}`));
     }
 
     const deletePokemon = () => {
@@ -117,20 +147,37 @@ function PokemonForm({ pokemon }) {
             <div className="row">
                 <div className="col s12 m8 offset-m2">
                     <div className="card hoverable">
-                        <div className="card-image">
-                            <img src={pokemon.picture} alt={pokemon.name} style={{ width: '250px', margin: '0 auto' }} />
-                            <span className="btn-floating halfway-fab waves-effect waves-light">
-                                <i onClick={deletePokemon} className="material-icons">delete</i>
-                            </span>
-                        </div>
+                        {isEditForm && (
+                            <div className="card-image">
+                                <img src={pokemon.picture} alt={pokemon.name} style={{ width: '250px', margin: '0 auto' }} />
+                                <span className="btn-floating halfway-fab waves-effect waves-light">
+                                    <i onClick={deletePokemon} className="material-icons">delete</i>
+                                </span>
+                            </div>
+                        )}
+
                         <div className="card-stacked">
                             <div className="card-content">
+                                {/* Pokemon picture */}
+                                {isAddForm() && (
+                                    <div className="form-group">
+                                        <label htmlFor="name">Image</label>
+                                        <input id="picture" name="picture" type="text" className="form-control" value={form.picture.value} onChange={e => inputChange(e)}></input>
+
+                                        {form.picture.error &&
+                                            <div className="card-panel red accent-1">
+                                                {form.picture.error}
+                                            </div>
+                                        }
+                                    </div>
+                                )}
+
                                 {/* Pokemon name */}
                                 <div className="form-group">
                                     <label htmlFor="name">Nom</label>
                                     <input id="name" name="name" type="text" className="form-control" value={form.name.value} onChange={e => inputChange(e)}></input>
 
-                                    {form.name.error && 
+                                    {form.name.error &&
                                         <div className="card-panel red accent-1">
                                             {form.name.error}
                                         </div>
@@ -142,7 +189,7 @@ function PokemonForm({ pokemon }) {
                                     <label htmlFor="hp">Point de vie</label>
                                     <input id="hp" name="hp" type="number" className="form-control" value={form.hp.value} onChange={e => inputChange(e)}></input>
 
-                                    {form.hp.error && 
+                                    {form.hp.error &&
                                         <div className="card-panel red accent-1">
                                             {form.hp.error}
                                         </div>
@@ -154,7 +201,7 @@ function PokemonForm({ pokemon }) {
                                     <label htmlFor="cp">Dégâts</label>
                                     <input id="cp" name="cp" type="number" className="form-control" value={form.cp.value} onChange={e => inputChange(e)}></input>
 
-                                    {form.cp.error && 
+                                    {form.cp.error &&
                                         <div className="card-panel red accent-1">
                                             {form.cp.error}
                                         </div>

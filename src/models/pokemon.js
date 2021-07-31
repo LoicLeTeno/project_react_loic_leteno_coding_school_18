@@ -1,12 +1,5 @@
-import React, { Component } from 'react';
-
-
-class POKEMON extends Component {
-
-    // Valeur de base pokémons
-    constructor(id, hp = 100, cp = 10, name = 'name', picture = 'http://...', types = ['Normal'], created = new Date()) {
-        
-        // Données demander pour créer le pokemon
+export default class POKEMON {
+    constructor(id, hp = 100, cp = 10, name = '...', picture = 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/XXX.png', types = ['Normal'], created = new Date()) {
         this.id = id;
         this.hp = hp;
         this.cp = cp;
@@ -15,9 +8,4 @@ class POKEMON extends Component {
         this.types = types;
         this.created = created;
     }
-    render() {
-        return;
-    }
 }
-
-export default POKEMON;
